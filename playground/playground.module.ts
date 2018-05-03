@@ -10,6 +10,8 @@ import { AppMaterialModule } from './app/material.module';
 import { FsExampleModule } from '@firestitch/example';
 import { FsExamplesComponent } from '../tools/components/examples/examples.component';
 import { FirstExampleComponent } from './app/components/first-example/first-example.component';
+import { FS_DOWNLOAD_HANDLER } from '../src/fs-dowload-providers';
+import { DownloadHandler } from './app/interceptors/download.handler';
 
 @NgModule({
   bootstrap: [ AppComponent ],
@@ -29,6 +31,10 @@ import { FirstExampleComponent } from './app/components/first-example/first-exam
     FsExamplesComponent
   ],
   providers: [
+    {
+      provide: FS_DOWNLOAD_HANDLER,
+      useClass: DownloadHandler
+    }
   ],
 })
 export class PlaygroundModule {
