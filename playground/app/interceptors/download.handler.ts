@@ -1,4 +1,4 @@
-import { FsDownloadHandler } from '../../../src/interceptors/base';
+import { FsDownloadHandler } from '../../../src/interceptors';
 
 export class DownloadHandler extends FsDownloadHandler {
   constructor() {
@@ -7,5 +7,10 @@ export class DownloadHandler extends FsDownloadHandler {
 
   begin(params) {
     console.log('begin ', params);
+  }
+
+  error(message, error) {
+    console.log('message', message);
+    console.log('error', error);
   }
 }

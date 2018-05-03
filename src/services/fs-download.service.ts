@@ -1,7 +1,8 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 import { guid } from '@firestitch/common/util';
+
 import { FS_DOWNLOAD_HANDLER } from '../fs-dowload-providers';
-import { FsDownloadHandler } from '../interceptors/base';
+import { FsDownloadHandler } from '../interceptors';
 
 
 @Injectable()
@@ -11,10 +12,6 @@ export class FsDownloadService {
     // Custom interceptors
     @Optional() @Inject(FS_DOWNLOAD_HANDLER) private handler: FsDownloadHandler,
   ) {
-    (window as any).test = () => {
-      console.log('hi!');
-      // console.log(iframe.contentWindow.document.body.innerHTML);
-    }
   }
 
   public download(path, method = 'get', parameters = {}) {
@@ -29,16 +26,15 @@ export class FsDownloadService {
     container.appendChild(iframe);
 
     document.body.appendChild(container);
-    // iframe.contentWindow.document.body.appendChild(form);
     form.submit();
-
-
-    // iframe.remove();
   }
 
   private initContainer() {
+    const prevFrame = document.getElementById('former-container');
+    if (prevFrame) { prevFrame.remove(); }
+
     const container = document.createElement('div');
-    container.classList.add('former-container');
+    container.setAttribute('id', 'former-container');
     container.setAttribute('style', 'display: none');
     container.setAttribute('data-type', 'iframe');
 
@@ -48,19 +44,27 @@ export class FsDownloadService {
   private initFrame(uniqID) {
     const iframe = document.createElement('iframe');
     iframe.setAttribute('src', 'about:blank');
-    iframe.setAttribute('name', uniqID);
+    iframe.setAttribute('name', `former-iframe-${uniqID}`);
     iframe.setAttribute('id', `former-iframe-${uniqID}`);
     iframe.setAttribute('class', 'former-iframe');
 
     iframe.setAttribute('style', 'display: none;');
-    // iframe.setAttribute('onload', 'test()');
 
     iframe.onload = () => {
-      console.log('test');
-      const fr = (document.getElementById(`former-iframe-${uniqID}`) as any);
-      const iframeDocument = fr.contentDocument || fr.contentWindow.document;
-      console.log(iframeDocument);
-      console.log(iframe.getElementsByTagName('body'));
+      let data: any = {};
+
+      try {
+        const iframeBody = iframe.contentWindow.document.body;
+
+        try {
+          data = JSON.parse(iframeBody.innerText);
+        } catch (e) {}
+
+      } catch (e) {
+        data.message = e.message;
+      }
+
+      this.handler.error(data.message, data.exception);
     };
 
     return iframe;
@@ -70,7 +74,7 @@ export class FsDownloadService {
     const form = document.createElement('form');
     form.setAttribute('action', path);
     form.setAttribute('method', method);
-    form.setAttribute('target', uniqID);
+    form.setAttribute('target', `former-iframe-${uniqID}`);
 
     for (const paramKey in parameters) {
       if (parameters.hasOwnProperty(paramKey)) {

@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { FsDownloadComponent } from './components';
 import { FsDownloadService } from './services';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { TokenInterceptor } from './interceptors/test';
 
 @NgModule({
   imports: [
@@ -20,7 +18,6 @@ import { TokenInterceptor } from './interceptors/test';
   ],
   providers: [
     FsDownloadService,
-    HttpClientModule,
   ],
 })
 export class FsDownloadModule {

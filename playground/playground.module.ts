@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app/material.module';
 import { FsExampleModule } from '@firestitch/example';
 import { FsExamplesComponent } from '../tools/components/examples/examples.component';
-import { FirstExampleComponent } from './app/components/first-example/first-example.component';
+import { DownloadComponent } from './app/components/first-example/download.component';
 import { FS_DOWNLOAD_HANDLER } from '../src/fs-dowload-providers';
 import { DownloadHandler } from './app/interceptors/download.handler';
 
@@ -27,7 +27,7 @@ import { DownloadHandler } from './app/interceptors/download.handler';
   ],
   declarations: [
     AppComponent,
-    FirstExampleComponent,
+    DownloadComponent,
     FsExamplesComponent
   ],
   providers: [
