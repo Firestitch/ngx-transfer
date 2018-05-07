@@ -11,17 +11,15 @@ export class DownloadComponent {
   }
 
   public request() {
-    this._download.download(
+    this._download.post(
       '/api/dummy/download',
-      'post',
       { test: 1, test2: { hi: '123'}}
     );
   }
 
   public error() {
-    this._download.download(
-      '/api/dummy/download?exception=errormessage',
-      'post',
+    this._download.post(
+      '/api/dummy/download?exception=Error message from server',
       { test: 1, test2: { hi: '123'}}
     );
   }

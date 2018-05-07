@@ -14,7 +14,11 @@ export class FsDownloadService {
   ) {
   }
 
-  public download(path, method = 'get', parameters = {}) {
+  public post(path, parameters = {}) {
+    return this.request(path, 'post', parameters);
+  }
+
+  public request(path, method = 'get', parameters = {}) {
     this.handler.begin(parameters);
     const uniqID = guid();
 
@@ -27,6 +31,7 @@ export class FsDownloadService {
 
     document.body.appendChild(container);
     form.submit();
+    iframe.setAttribute('submitted', 'true');
   }
 
   private initContainer() {
@@ -47,24 +52,26 @@ export class FsDownloadService {
     iframe.setAttribute('name', `former-iframe-${uniqID}`);
     iframe.setAttribute('id', `former-iframe-${uniqID}`);
     iframe.setAttribute('class', 'former-iframe');
-
     iframe.setAttribute('style', 'display: none;');
 
-    iframe.onload = () => {
-      let data: any = {};
+    iframe.onload = (event: any) => {
 
-      try {
-        const iframeBody = iframe.contentWindow.document.body;
-
-        try {
-          data = JSON.parse(iframeBody.innerText);
-        } catch (e) {}
-
-      } catch (e) {
-        data.message = e.message;
+      if (!event.target.hasAttribute('submitted')) {
+        return;
       }
 
-      this.handler.error(data.message, data.exception);
+      let data: any = {};
+      let raw = '';
+
+      try {
+
+        const iframeBody = iframe.contentWindow.document.body;
+        raw = iframeBody.innerText;
+
+        data = JSON.parse(raw);
+      } catch (e) {}
+
+      this.handler.error(data, raw);
     };
 
     return iframe;

@@ -1,4 +1,5 @@
 import './../tools/assets/playground.scss';
+// import './../node_modules/@firestitch/message/package/assets/styles.css';
 
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +9,7 @@ import { FsDownloadModule } from '../src';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app/material.module';
 import { FsExampleModule } from '@firestitch/example';
-import { FsExamplesComponent } from '../tools/components/examples/examples.component';
+import { FsMessageModule, FsMessage } from '@firestitch/message';
 import { DownloadComponent } from './app/components/first-example/download.component';
 import { FS_DOWNLOAD_HANDLER } from '../src/fs-dowload-providers';
 import { DownloadHandler } from './app/interceptors/download.handler';
@@ -22,18 +23,19 @@ import { DownloadHandler } from './app/interceptors/download.handler';
     AppMaterialModule,
     FormsModule,
     FsExampleModule,
+    FsMessageModule
   ],
   entryComponents: [
   ],
   declarations: [
     AppComponent,
-    DownloadComponent,
-    FsExamplesComponent
+    DownloadComponent
   ],
   providers: [
     {
       provide: FS_DOWNLOAD_HANDLER,
-      useClass: DownloadHandler
+      useClass: DownloadHandler,
+      deps: [ FsMessage ]
     }
   ],
 })

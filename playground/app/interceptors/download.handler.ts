@@ -1,16 +1,21 @@
 import { FsDownloadHandler } from '../../../src/interceptors';
+import { FsMessage } from '@firestitch/message';
 
 export class DownloadHandler extends FsDownloadHandler {
-  constructor() {
+  constructor(private fsMessage: FsMessage) {
     super();
   }
 
   begin(params) {
     console.log('begin ', params);
+    // this.fsMessage.info('Starting download...');
   }
 
-  error(message, error) {
-    console.log('message', message);
-    console.log('error', error);
+  error(data, raw) {
+
+    const message = data && data.message ? data.message : 'There was a problem with the download';
+
+    this.fsMessage.error(message);
+    console.log('error', data);
   }
 }

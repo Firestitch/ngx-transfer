@@ -7,5 +7,5 @@ export class FsDownloadHandler implements FsApiBaseHander {
   constructor() {}
 
   begin(params) {}
-  error(message, error) {}
+  error(data, raw) {}
 }
