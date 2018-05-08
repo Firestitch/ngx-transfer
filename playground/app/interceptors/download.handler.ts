@@ -8,7 +8,7 @@ export class DownloadHandler extends FsDownloadHandler {
 
   begin(params) {
     console.log('begin ', params);
-    // this.fsMessage.info('Starting download...');
+    this.fsMessage.info('Starting download...');
   }
 
   error(data, raw) {

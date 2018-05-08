@@ -1,5 +1,6 @@
-import './../tools/assets/playground.scss';
-// import './../node_modules/@firestitch/message/package/assets/styles.css';
+import './styles.scss';
+// import './../tools/assets/playground.scss';
+// import '@firestitch/message/package/assets/styles.css';
 
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +14,7 @@ import { FsMessageModule, FsMessage } from '@firestitch/message';
 import { DownloadComponent } from './app/components/first-example/download.component';
 import { FS_DOWNLOAD_HANDLER } from '../src/fs-dowload-providers';
 import { DownloadHandler } from './app/interceptors/download.handler';
+
 
 @NgModule({
   bootstrap: [ AppComponent ],
