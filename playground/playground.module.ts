@@ -12,7 +12,7 @@ import { AppMaterialModule } from './app/material.module';
 import { FsExampleModule } from '@firestitch/example';
 import { FsMessageModule, FsMessage } from '@firestitch/message';
 import { DownloadComponent } from './app/components/first-example/download.component';
-import { FS_DOWNLOAD_HANDLER } from '../src/fs-dowload-providers';
+import { FS_DOWNLOAD_HANDLER } from '../src';
 import { DownloadHandler } from './app/interceptors/download.handler';
 
 

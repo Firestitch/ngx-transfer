@@ -2,7 +2,7 @@ import { Inject, Injectable, Optional } from '@angular/core';
 import { guid } from '@firestitch/common/util';
 
 import { FS_DOWNLOAD_HANDLER } from '../fs-dowload-providers';
-import { FsDownloadHandler } from '../interceptors';
+import { FsDownloadHandler } from '../handlers';
 
 
 @Injectable()

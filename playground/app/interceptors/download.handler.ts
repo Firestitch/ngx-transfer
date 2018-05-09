@@ -1,4 +1,4 @@
-import { FsDownloadHandler } from '../../../src/interceptors';
+import { FsDownloadHandler } from '../../../src';
 import { FsMessage } from '@firestitch/message';
 
 export class DownloadHandler extends FsDownloadHandler {
