@@ -1,16 +1,16 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 import { guid } from '@firestitch/common/util';
 
-import { FS_DOWNLOAD_HANDLER } from '../fs-dowload-providers';
-import { FsDownloadHandler } from '../handlers';
+import { FS_TRANSFER_HANDLER } from '../fs-transfer-providers';
+import { FsTransferHandler } from '../handlers';
 
 
 @Injectable()
-export class FsDownloadService {
+export class FsTransferService {
 
   constructor(
     // Custom interceptors
-    @Optional() @Inject(FS_DOWNLOAD_HANDLER) private handler: FsDownloadHandler,
+    @Optional() @Inject(FS_TRANSFER_HANDLER) private handler: FsTransferHandler,
   ) {
   }
 

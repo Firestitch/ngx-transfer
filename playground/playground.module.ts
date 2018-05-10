@@ -6,21 +6,21 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app/app.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { FsDownloadModule } from '../src';
+import { FsTransferModule } from '../src';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app/material.module';
 import { FsExampleModule } from '@firestitch/example';
 import { FsMessageModule, FsMessage } from '@firestitch/message';
-import { DownloadComponent } from './app/components/first-example/download.component';
-import { FS_DOWNLOAD_HANDLER } from '../src';
-import { DownloadHandler } from './app/interceptors/download.handler';
+import { TransferComponent } from './app/components/first-example/transfer.component';
+import { FS_TRANSFER_HANDLER } from '../src';
+import { TransferHandler } from './app/interceptors/transfer.handler';
 
 
 @NgModule({
   bootstrap: [ AppComponent ],
   imports: [
     BrowserModule,
-    FsDownloadModule,
+    FsTransferModule,
     BrowserAnimationsModule,
     AppMaterialModule,
     FormsModule,
@@ -31,12 +31,12 @@ import { DownloadHandler } from './app/interceptors/download.handler';
   ],
   declarations: [
     AppComponent,
-    DownloadComponent
+    TransferComponent
   ],
   providers: [
     {
-      provide: FS_DOWNLOAD_HANDLER,
-      useClass: DownloadHandler,
+      provide: FS_TRANSFER_HANDLER,
+      useClass: TransferHandler,
       deps: [ FsMessage ]
     }
   ],

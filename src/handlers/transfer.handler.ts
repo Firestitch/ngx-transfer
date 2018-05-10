@@ -3,7 +3,7 @@ export interface FsApiBaseHander {
   error(error, config);
 }
 
-export class FsDownloadHandler implements FsApiBaseHander {
+export class FsTransferHandler implements FsApiBaseHander {
   constructor() {}
 
   begin(params) {}

@@ -1,7 +1,7 @@
-import { FsDownloadHandler } from '../../../src';
+import { FsTransferHandler } from '../../../src';
 import { FsMessage } from '@firestitch/message';
 
-export class DownloadHandler extends FsDownloadHandler {
+export class TransferHandler extends FsTransferHandler {
   constructor(private fsMessage: FsMessage) {
     super();
   }
