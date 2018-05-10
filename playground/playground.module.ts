@@ -13,7 +13,7 @@ import { FsExampleModule } from '@firestitch/example';
 import { FsMessageModule, FsMessage } from '@firestitch/message';
 import { TransferComponent } from './app/components/first-example/transfer.component';
 import { FS_TRANSFER_HANDLER } from '../src';
-import { TransferHandler } from './app/interceptors/transfer.handler';
+import { TransferHandler } from './app/handlers/transfer.handler';
 
 
 @NgModule({
