@@ -11,7 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app/material.module';
 import { FsExampleModule } from '@firestitch/example';
 import { FsMessageModule, FsMessage } from '@firestitch/message';
-import { TransferComponent } from './app/components/first-example/transfer.component';
+import { SuccessComponent } from './app/components/success/success.component';
+import { FailedComponent } from './app/components/failed/failed.component';
 import { FS_TRANSFER_HANDLER } from '../src';
 import { TransferHandler } from './app/handlers/transfer.handler';
 
@@ -31,7 +32,8 @@ import { TransferHandler } from './app/handlers/transfer.handler';
   ],
   declarations: [
     AppComponent,
-    TransferComponent
+    SuccessComponent,
+    FailedComponent
   ],
   providers: [
     {

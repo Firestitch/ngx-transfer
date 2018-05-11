@@ -1,14 +1,19 @@
 <fs-examples title="Transfer">
 
-  <div class="example-h2">Installation</div>
-  <div class="example-h3">transfer.handler.ts</div>
-  <fs-example-highlight [source]="handlerCode" language="ts"></fs-example-highlight>
+  <div fs-examples-install>
+    <div class="examples-h3">transfer.handler.ts</div>
+    <fs-example-highlight [source]="handlerCode" language="ts"></fs-example-highlight>
 
-  <div class="example-h3">app.module.ts</div>
-  <fs-example-highlight [source]="moduleCode" language="ts"></fs-example-highlight>
+    <div class="examples-h3">app.module.ts</div>
+    <fs-example-highlight [source]="moduleCode" language="ts"></fs-example-highlight>
+  </div>
 
-  <fs-example title="Transfer Example" componentName="transfer">
-    <transfer></transfer>
+  <fs-example title="Successful Transfer" componentName="success">
+    <success></success>
+  </fs-example>
+
+  <fs-example title="Failed Transfer" componentName="failed">
+    <failed></failed>
   </fs-example>
 </fs-examples>
 
