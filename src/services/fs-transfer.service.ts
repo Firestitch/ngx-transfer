@@ -3,6 +3,7 @@ import { guid } from '@firestitch/common/util';
 
 import { FS_TRANSFER_HANDLER } from '../fs-transfer-providers';
 import { FsTransferHandler } from '../handlers';
+import { Request } from '../models';
 
 
 @Injectable()
@@ -19,7 +20,9 @@ export class FsTransferService {
   }
 
   public request(path, method = 'get', parameters = {}) {
-    this.handler.begin(parameters);
+    const request = new Request(method, path, parameters);
+
+    this.handler.begin(request);
     const uniqID = guid();
 
     const container = this.initContainer();
