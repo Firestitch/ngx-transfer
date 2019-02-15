@@ -1,31 +1,32 @@
-import './styles.scss';
-// import './../tools/assets/playground.scss';
-// import '@firestitch/message/package/assets/styles.css';
-
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AppComponent } from './app/app.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { FsTransferModule } from '../src';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppMaterialModule } from './app/material.module';
+
+import { FsTransferModule, FS_TRANSFER_HANDLER } from '@firestitch/transfer';
 import { FsExampleModule } from '@firestitch/example';
 import { FsMessageModule, FsMessage } from '@firestitch/message';
-import { SuccessComponent } from './app/components/success/success.component';
-import { FailedComponent } from './app/components/failed/failed.component';
-import { FS_TRANSFER_HANDLER } from '../src';
-import { TransferHandler } from './app/handlers/transfer.handler';
+
+import { ToastrModule } from 'ngx-toastr';
+
+import { AppComponent } from './app.component';
+import { AppMaterialModule } from './material.module';
+import { SuccessComponent } from './components/success/success.component';
+import { FailedComponent } from './components/failed/failed.component';
+import { TransferHandler } from './handlers/transfer.handler';
 
 
 @NgModule({
   bootstrap: [ AppComponent ],
   imports: [
     BrowserModule,
-    FsTransferModule,
+    FsTransferModule.forRoot(),
     BrowserAnimationsModule,
     AppMaterialModule,
     FormsModule,
-    FsExampleModule,
+    FsExampleModule.forRoot(),
+    ToastrModule.forRoot({ preventDuplicates: true }),
+    FsMessageModule.forRoot(),
     FsMessageModule
   ],
   entryComponents: [

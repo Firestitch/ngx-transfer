@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FsTransferService } from '../../../../src/services';
+import { FsTransferService } from '@firestitch/transfer';
 
 @Component({
   selector: 'success',

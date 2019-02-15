@@ -1,9 +1,9 @@
 import { Inject, Injectable, Optional } from '@angular/core';
-import { guid } from '@firestitch/common/util';
+import { guid } from '@firestitch/common';
 
 import { FS_TRANSFER_HANDLER } from '../fs-transfer-providers';
-import { FsTransferHandler } from '../handlers';
-import { Request } from '../models';
+import { FsTransferHandler } from '../handlers/transfer.handler';
+import { Request } from '../models/request.model';
 
 
 @Injectable()

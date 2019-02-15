@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+
+  public config = environment;
 
   public handlerCode = `import { FsTransferHandler } from '@firestitch/transfer';
 import { FsMessage } from '@firestitch/message';

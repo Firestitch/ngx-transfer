@@ -1,4 +1,4 @@
-import { FsTransferHandler } from '../../../src';
+import { FsTransferHandler } from '@firestitch/transfer';
 import { FsMessage } from '@firestitch/message';
 
 export class TransferHandler extends FsTransferHandler {
