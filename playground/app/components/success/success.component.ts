@@ -15,7 +15,13 @@ export class SuccessComponent {
   public request() {
     this._transfer.post(
       this.url,
-      { parameter: 'value', array: { key: 'value' }}
+      {
+        format: 'csv',
+        string: 'value',
+        object: { key: 'value' },
+        array: ['1', '2', '3'],
+        date: new Date()
+      }
     );
   }
 }

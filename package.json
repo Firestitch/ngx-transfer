@@ -2,7 +2,7 @@
   "name": "@firestitch/transfer",
   "title": "Transfer",
   "description": "@firestitch/transfer",
-  "version": "0.2.0",
+  "version": "7.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/ngx-transfer"
@@ -59,7 +59,8 @@
     "typescript": "^3.1.6",
     "webpack": "^4.29.1",
     "webpack-dev-server": "^3.1.14",
-    "zone.js": "^0.8.29"
+    "zone.js": "^0.8.29",
+    "date-fns": "^2.5.0"
   },
   "engines": {
     "node": ">=6.0.0"

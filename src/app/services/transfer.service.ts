@@ -4,6 +4,8 @@ import { guid } from '@firestitch/common';
 import { FS_TRANSFER_HANDLER } from '../fs-transfer-providers';
 import { FsTransferHandler } from '../handlers/transfer.handler';
 import { Request } from '../models/request.model';
+import { isArray, isObject } from 'lodash-es';
+import { format } from 'date-fns';
 
 
 @Injectable()
@@ -89,7 +91,16 @@ export class FsTransferService {
     for (const paramKey in parameters) {
       if (parameters.hasOwnProperty(paramKey)) {
         let value = parameters[paramKey];
-        if (value instanceof Object) { value = JSON.stringify(value); }
+
+        if (value instanceof Date) {
+          value = format(value, `yyyy-MM-dd'T'HH:mm:ssxxx`);
+
+        } else if (isArray(value)) {
+          value = value.join(',');
+
+        } else if (isObject(value)) {
+          value = JSON.stringify(value);
+        }
 
         const paramInput = document.createElement('input');
         paramInput.setAttribute('type', 'hidden');
