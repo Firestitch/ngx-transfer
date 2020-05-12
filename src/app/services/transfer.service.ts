@@ -88,29 +88,43 @@ export class FsTransferService {
     form.setAttribute('method', method);
     form.setAttribute('target', `former-iframe-${uniqID}`);
 
-    for (const paramKey in parameters) {
-      if (parameters.hasOwnProperty(paramKey)) {
-        let value = parameters[paramKey];
+    this._objectToForm(parameters, form);
 
-        if (value instanceof Date) {
-          value = format(value, `yyyy-MM-dd'T'HH:mm:ssxxx`);
+    return form;
+  }
 
-        } else if (isArray(value)) {
-          value = value.join(',');
+  private _objectToForm(target, form, namespace = null, level = 0) {
 
-        } else if (isObject(value)) {
-          value = JSON.stringify(value);
+    level++;
+    // Depth limit
+    if (level > 10) {
+      throw Error('Maximum call stack size exceeded');
+    }
+
+    if (target === void 0 || target === null) {
+      return;
+    }
+
+    Object.keys(target).forEach((property) => {
+      let item = target[property];
+      const formKey = namespace ? `${namespace}[${property}]` : property;
+
+      if (item && typeof item === 'object') {
+        this._objectToForm(item, form, formKey, level)
+      } else {
+
+        if (item instanceof Date) {
+          item = format(item, `yyyy-MM-dd'T'HH:mm:ssxxx`);
         }
 
         const paramInput = document.createElement('input');
         paramInput.setAttribute('type', 'hidden');
-        paramInput.setAttribute('name', paramKey);
-        paramInput.setAttribute('value', value);
+        paramInput.setAttribute('name', formKey);
+        paramInput.setAttribute('value', item);
 
         form.appendChild(paramInput);
       }
-    }
-
-    return form;
+    });
   }
+
 }

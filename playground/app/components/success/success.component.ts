@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FsTransferService } from '@firestitch/transfer';
 
+
 @Component({
   selector: 'success',
   templateUrl: 'success.component.html',
@@ -18,7 +19,7 @@ export class SuccessComponent {
       {
         format: 'csv',
         string: 'value',
-        object: { key: 'value' },
+        object: { key: 'value', value: { name: 'Test' } },
         array: ['1', '2', '3'],
         date: new Date()
       }
