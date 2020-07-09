@@ -4,7 +4,6 @@ import { guid } from '@firestitch/common';
 import { FS_TRANSFER_HANDLER } from '../fs-transfer-providers';
 import { FsTransferHandler } from '../handlers/transfer.handler';
 import { Request } from '../models/request.model';
-import { isArray, isObject } from 'lodash-es';
 import { format } from 'date-fns';
 
 
@@ -24,29 +23,37 @@ export class FsTransferService {
   public request(path, method = 'get', parameters = {}) {
     const request = new Request(method, path, parameters);
 
+    this._cleanup();
     this.handler.begin(request);
-    const uniqID = guid();
+    const uuid = guid();
 
     const container = this.initContainer();
-    const iframe = this.initFrame(uniqID);
-    const form = this.initForm(path, method, parameters, uniqID);
+    const iframe = this.initFrame(uuid);
+    const form = this.initForm(path, method, parameters, uuid);
 
-    container.appendChild(form);
-    container.appendChild(iframe);
+    const div = document.createElement('div');
 
-    document.body.appendChild(container);
+    div.setAttribute('id', `fs-transfer-${uuid}`);
+    div.setAttribute('data-time', (new Date()).getTime().toString());
+    div.classList.add('fs-transfer');
+    div.appendChild(form);
+    div.appendChild(iframe);
+    div.setAttribute('style', 'display: none;');
+
+    container.appendChild(div);
+
     form.submit();
     iframe.setAttribute('submitted', 'true');
   }
 
   private initContainer() {
-    const prevFrame = document.getElementById('former-container');
-    if (prevFrame) { prevFrame.remove(); }
+    let container = document.getElementById('fs-transfer-container');
 
-    const container = document.createElement('div');
-    container.setAttribute('id', 'former-container');
-    container.setAttribute('style', 'display: none');
-    container.setAttribute('data-type', 'iframe');
+    if (!container) {
+      container = document.createElement('div');
+      container.setAttribute('id', 'fs-transfer-container');
+      document.body.appendChild(container);
+    }
 
     return container;
   }
@@ -54,10 +61,8 @@ export class FsTransferService {
   private initFrame(uniqID) {
     const iframe = document.createElement('iframe');
     iframe.setAttribute('src', 'about:blank');
-    iframe.setAttribute('name', `former-iframe-${uniqID}`);
-    iframe.setAttribute('id', `former-iframe-${uniqID}`);
-    iframe.setAttribute('class', 'former-iframe');
-    iframe.setAttribute('style', 'display: none;');
+    iframe.setAttribute('name', `fs-transfer-iframe-${uniqID}`);
+    iframe.setAttribute('id', `fs-transfer-iframe-${uniqID}`);
 
     iframe.onload = (event: any) => {
 
@@ -70,11 +75,13 @@ export class FsTransferService {
 
       try {
 
+        // Needs to be the same domain to see the body content
         const iframeBody = iframe.contentWindow.document.body;
         raw = iframeBody.innerText;
 
         data = JSON.parse(raw);
-      } catch (e) {}
+
+      } catch (e) { }
 
       this.handler.error(data, raw);
     };
@@ -86,11 +93,22 @@ export class FsTransferService {
     const form = document.createElement('form');
     form.setAttribute('action', path);
     form.setAttribute('method', method);
-    form.setAttribute('target', `former-iframe-${uniqID}`);
+    form.setAttribute('target', `fs-transfer-iframe-${uniqID}`);
 
     this._objectToForm(parameters, form);
 
     return form;
+  }
+
+  private _cleanup() {
+    // Expiry 1 day
+    const expiryTime = (new Date()).getTime() - (60 * 60 * 24);
+    document.querySelectorAll('#fs-transfer-container .fs-transfer')
+      .forEach((el) => {
+        if (parseInt(el.getAttribute('data-time')) < expiryTime) {
+          el.remove();
+        }
+      });
   }
 
   private _objectToForm(target, form, namespace = null, level = 0) {

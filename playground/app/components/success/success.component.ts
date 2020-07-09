@@ -14,9 +14,14 @@ export class SuccessComponent {
   constructor(private _transfer: FsTransferService) {}
 
   public request() {
+    this._request();
+  }
+
+  private _request() {
     this._transfer.post(
       this.url,
       {
+        sleep: 2,
         format: 'csv',
         string: 'value',
         object: { key: 'value', value: { name: 'Test' } },
