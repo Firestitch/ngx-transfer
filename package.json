@@ -2,7 +2,7 @@
   "name": "@firestitch/transfer",
   "title": "Transfer",
   "description": "@firestitch/transfer",
-  "version": "8.0.2",
+  "version": "8.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/ngx-transfer"

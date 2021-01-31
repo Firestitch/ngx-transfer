@@ -5,11 +5,11 @@ import { FsTransferService } from '@firestitch/transfer';
 @Component({
   selector: 'success',
   templateUrl: 'success.component.html',
-  styles: ['mat-form-field { width: 100%; }']
+  styles: ['mat-form-field { width: 100%; }'],
 })
 export class SuccessComponent {
 
-  public url = 'https://boilerplate.firestitch.com/api/dummy/download';
+  public url = 'dummy/download';
 
   constructor(private _transfer: FsTransferService) {}
 

@@ -21,15 +21,13 @@ export class FsTransferService {
   }
 
   public request(path, method = 'get', parameters = {}) {
-    const request = new Request(method, path, parameters);
-
     this._cleanup();
-    this.handler.begin(request);
+    const request = this.handler.begin(new Request(method, path, parameters));
     const uuid = guid();
 
     const container = this.initContainer();
     const iframe = this.initFrame(uuid);
-    const form = this.initForm(path, method, parameters, uuid);
+    const form = this.initForm(request, uuid);
 
     const div = document.createElement('div');
 
@@ -89,13 +87,13 @@ export class FsTransferService {
     return iframe;
   }
 
-  private initForm(path, method, parameters, uniqID) {
+  private initForm(request: Request, uniqID) {
     const form = document.createElement('form');
-    form.setAttribute('action', path);
-    form.setAttribute('method', method);
+    form.setAttribute('action', request.path);
+    form.setAttribute('method', request.method);
     form.setAttribute('target', `fs-transfer-iframe-${uniqID}`);
 
-    this._objectToForm(parameters, form);
+    this._objectToForm(request.params, form);
 
     return form;
   }
@@ -128,8 +126,8 @@ export class FsTransferService {
       const formKey = namespace ? `${namespace}[${property}]` : property;
 
       if (item && typeof item === 'object') {
-        this._objectToForm(item, form, formKey, level)
-      } else {
+        this._objectToForm(item, form, formKey, level);
+      } else if (item !== undefined) {
 
         if (item instanceof Date) {
           item = format(item, `yyyy-MM-dd'T'HH:mm:ssxxx`);

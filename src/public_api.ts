@@ -13,5 +13,5 @@ export { Request } from './app/models/request.model';
 
 // Handlers
 export { RequestHandler } from './app/classes/request-handler';
-export { FsApiBaseHander, FsTransferHandler } from './app/handlers/transfer.handler';
+export { FsTransferHandler } from './app/handlers/transfer.handler';
 export { FS_TRANSFER_HANDLER } from './app/fs-transfer-providers';

@@ -1,11 +1,10 @@
-export interface FsApiBaseHander {
-  begin(params);
-  error(error, config);
-}
+import { Request } from '../models/request.model';
 
-export class FsTransferHandler implements FsApiBaseHander {
-  constructor() {}
+export class FsTransferHandler {
 
-  begin(params) {}
-  error(data, raw) {}
+  public begin(request: Request): Request {
+    return request;
+  }
+
+  public error(data: any, raw: string) {}
 }

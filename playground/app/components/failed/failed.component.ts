@@ -8,14 +8,18 @@ import { FsTransferService } from '@firestitch/transfer';
 })
 export class FailedComponent {
 
-  public url = 'https://boilerplate.firestitch.com/api/dummy/download?exception=Error message from server';
+  public url = 'dummy/download?exception=Error message from server';
 
   constructor(private _transfer: FsTransferService) {}
 
   public request() {
     this._transfer.post(
       this.url,
-      { parameter: 'value', array: { key: 'value' }}
+      {
+        parameter: 'value',
+        array: { key: 'value' },
+        undefined: undefined,
+      }
     );
   }
 }

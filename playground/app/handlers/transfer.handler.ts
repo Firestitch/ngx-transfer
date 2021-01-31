@@ -1,4 +1,4 @@
-import { FsTransferHandler } from '@firestitch/transfer';
+import { FsTransferHandler, Request } from '@firestitch/transfer';
 import { FsMessage } from '@firestitch/message';
 
 export class TransferHandler extends FsTransferHandler {
@@ -6,12 +6,14 @@ export class TransferHandler extends FsTransferHandler {
     super();
   }
 
-  begin(params) {
-    console.log('begin ', params);
+  public begin(request: Request) {
+    console.log('begin ', request);
+
     this.fsMessage.info('Starting download...');
+    return request.clone({ path: `https://specify.dev.firestitch.com/api/${request.path}` })
   }
 
-  error(data, raw) {
+  public error(data, raw) {
 
     const message = data && data.message ? data.message : 'There was a problem with the download';
 
