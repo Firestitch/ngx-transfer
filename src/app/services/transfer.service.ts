@@ -125,22 +125,23 @@ export class FsTransferService {
       let item = target[property];
       const formKey = namespace ? `${namespace}[${property}]` : property;
 
-      if (item && typeof item === 'object') {
+      if (item instanceof Date) {
+        item = format(item, `yyyy-MM-dd'T'HH:mm:ssxxx`);
+        this._appendForm(form, formKey, item);
+      } else if (item && typeof item === 'object') {
         this._objectToForm(item, form, formKey, level);
       } else if (item !== undefined) {
-
-        if (item instanceof Date) {
-          item = format(item, `yyyy-MM-dd'T'HH:mm:ssxxx`);
-        }
-
-        const paramInput = document.createElement('input');
-        paramInput.setAttribute('type', 'hidden');
-        paramInput.setAttribute('name', formKey);
-        paramInput.setAttribute('value', item);
-
-        form.appendChild(paramInput);
+        this._appendForm(form, formKey, item);
       }
     });
+  }
+
+  private _appendForm(form, name, value) {
+    const paramInput = document.createElement('input');
+    paramInput.setAttribute('type', 'hidden');
+    paramInput.setAttribute('name', name);
+    paramInput.setAttribute('value', value);
+    form.appendChild(paramInput);
   }
 
 }
