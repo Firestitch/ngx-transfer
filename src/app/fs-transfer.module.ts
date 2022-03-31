@@ -12,7 +12,7 @@ import { FsTransferService } from './services/transfer.service';
   providers: [],
 })
 export class FsTransferModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<FsTransferModule> {
     return {
       ngModule: FsTransferModule,
       providers: [FsTransferService]
