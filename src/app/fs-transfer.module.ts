@@ -1,21 +1,16 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 
-import { FsTransferService } from './services/transfer.service';
 
 @NgModule({
   imports: [
     CommonModule,
   ],
-  entryComponents: [
-  ],
-  providers: [],
 })
 export class FsTransferModule {
   static forRoot(): ModuleWithProviders<FsTransferModule> {
     return {
       ngModule: FsTransferModule,
-      providers: [FsTransferService]
     };
   }
 }

@@ -1,5 +1,5 @@
-import { FsTransferHandler, Request } from '@firestitch/transfer';
 import { FsMessage } from '@firestitch/message';
+import { FsTransferHandler, Request } from '@firestitch/transfer';
 
 export class TransferHandler extends FsTransferHandler {
   constructor(private fsMessage: FsMessage) {
@@ -10,7 +10,8 @@ export class TransferHandler extends FsTransferHandler {
     console.log('begin ', request);
 
     this.fsMessage.info('Starting download...');
-    return request.clone({ path: `https://specify.dev.firestitch.com/api/${request.path}` })
+
+    return request.clone({ path: `https://specify.dev.firestitch.com/api/${request.path}` });
   }
 
   public error(data, raw) {

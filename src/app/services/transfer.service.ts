@@ -1,13 +1,15 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 import { guid } from '@firestitch/common';
 
+import { format } from 'date-fns';
 import { FS_TRANSFER_HANDLER } from '../fs-transfer-providers';
 import { FsTransferHandler } from '../handlers/transfer.handler';
 import { Request } from '../models/request.model';
-import { format } from 'date-fns';
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class FsTransferService {
 
   constructor(
