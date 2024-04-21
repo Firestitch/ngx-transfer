@@ -14,6 +14,8 @@ import { FailedComponent } from './components/failed/failed.component';
 import { SuccessComponent } from './components/success/success.component';
 import { TransferHandler } from './handlers/transfer.handler';
 import { AppMaterialModule } from './material.module';
+import { FS_API_REQUEST_INTERCEPTOR, FsApi, FsApiModule } from '@firestitch/api';
+import { ApiInterceptor, ApiInterceptorFactory } from './interceptors';
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import { AppMaterialModule } from './material.module';
     FormsModule,
     FsExampleModule.forRoot(),
     FsMessageModule.forRoot(),
+    FsApiModule.forRoot(),
     FsMessageModule,
   ],
   declarations: [
@@ -38,6 +41,10 @@ import { AppMaterialModule } from './material.module';
       provide: FS_TRANSFER_HANDLER,
       useClass: TransferHandler,
       deps: [FsMessage],
+    },
+    {
+      provide: FS_API_REQUEST_INTERCEPTOR,
+      useFactory: ApiInterceptorFactory,
     },
   ],
 })

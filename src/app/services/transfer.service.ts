@@ -1,5 +1,6 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 import { guid } from '@firestitch/common';
+import { FsApi, RequestMethod } from '@firestitch/api';
 
 import { format } from 'date-fns';
 import { FS_TRANSFER_HANDLER } from '../fs-transfer-providers';
@@ -13,20 +14,25 @@ import { Request } from '../models/request.model';
 export class FsTransferService {
 
   constructor(
-    // Custom interceptors
     @Optional() @Inject(FS_TRANSFER_HANDLER) private handler: FsTransferHandler,
+    private _api: FsApi,
   ) {
   }
 
   public post(path, parameters = {}) {
-    return this.request(path, 'post', parameters);
+    return this.request(path, RequestMethod.Post, parameters);
   }
 
-  public request(path, method = 'get', parameters = {}) {
+  public request(path, method: RequestMethod, data = {}) {
     this._cleanup();
-    const request = this.handler.begin(new Request(method, path, parameters));
-    const uuid = guid();
+    const request = this.handler.begin(new Request(method, path, data));
 
+    this._api.createApiFile(path, { method, data })
+      .download();
+
+      return;
+
+    const uuid = guid();
     const container = this.initContainer();
     const iframe = this.initFrame(uuid);
     const form = this.initForm(request, uuid);
