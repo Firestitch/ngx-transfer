@@ -1,11 +1,5 @@
-import { Inject, Injectable, Optional } from '@angular/core';
-import { guid } from '@firestitch/common';
+import { Injectable } from '@angular/core';
 import { FsApi, RequestMethod } from '@firestitch/api';
-
-import { format } from 'date-fns';
-import { FS_TRANSFER_HANDLER } from '../fs-transfer-providers';
-import { FsTransferHandler } from '../handlers/transfer.handler';
-import { Request } from '../models/request.model';
 
 
 @Injectable({

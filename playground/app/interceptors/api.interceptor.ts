@@ -1,12 +1,13 @@
 
-import { makeInterceptorFactory, RequestInterceptor } from '@firestitch/api';
+import { makeInterceptorFactory,  } from '@firestitch/api';
 
 import { Observable } from 'rxjs';
 
-import { HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
+
+import { HttpEvent, HttpHandler, HttpRequest, HttpInterceptor } from '@angular/common/http';
 
 
-export class ApiInterceptor extends RequestInterceptor {
+export class ApiInterceptor implements HttpInterceptor {
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     //const apiDomain= 'specify.firestitch.dev';
