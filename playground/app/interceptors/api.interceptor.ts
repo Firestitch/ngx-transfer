@@ -11,7 +11,7 @@ export class ApiInterceptor implements HttpInterceptor {
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     //const apiDomain= 'specify.firestitch.dev';
-    const apiDomain= 'specify.local.firestitch.com';
+    const apiDomain = 'specify.local.firestitch.com';
     const url = `https://${apiDomain}/api/`.concat(req.url);
 
     return next.handle(req.clone({ url }));
