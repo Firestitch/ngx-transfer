@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { FsApi, RequestMethod } from '@firestitch/api';
 
 
@@ -6,10 +6,8 @@ import { FsApi, RequestMethod } from '@firestitch/api';
   providedIn: 'root',
 })
 export class FsTransferService {
+  private _api = inject(FsApi);
 
-  constructor(
-    private _api: FsApi,
-  ) {}
 
   public post(path, parameters = {}) {
     return this.request(path, RequestMethod.Post, parameters);

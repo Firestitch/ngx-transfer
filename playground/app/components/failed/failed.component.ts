@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FsTransferService } from '@firestitch/transfer';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
@@ -13,10 +13,10 @@ import { MatButton } from '@angular/material/button';
     imports: [MatFormField, MatInput, FormsModule, MatButton]
 })
 export class FailedComponent {
+  private _transfer = inject(FsTransferService);
+
 
   public url = 'dummy/download?exception=Error message from server';
-
-  constructor(private _transfer: FsTransferService) {}
 
   public request() {
     this._transfer.post(
