@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { environment } from '../environments/environment';
+import { FsExampleModule } from '@firestitch/example';
+import { SuccessComponent } from './components/success/success.component';
+import { FailedComponent } from './components/failed/failed.component';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html'
+    selector: 'app-root',
+    templateUrl: 'app.component.html',
+    standalone: true,
+    imports: [FsExampleModule, SuccessComponent, FailedComponent]
 })
 export class AppComponent {
 
